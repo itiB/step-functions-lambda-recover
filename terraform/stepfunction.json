@@ -1,0 +1,24 @@
+{
+  "Comment": "SQSからのイベントでLambdaAを実行し、失敗時はLambdaBでDynamoDBに記録するサンプル",
+  "StartAt": "MainLambda",
+  "States": {
+    "MainLambda": {
+      "Type": "Task",
+      "Resource": "${MainLambdaArn}",
+      "Catch": [
+        {
+          "ErrorEquals": [
+            "States.ALL"
+          ],
+          "Next": "FailureLambda"
+        }
+      ],
+      "End": true
+    },
+    "FailureLambda": {
+      "Type": "Task",
+      "Resource": "${FailureLambdaArn}",
+      "End": true
+    }
+  }
+}
