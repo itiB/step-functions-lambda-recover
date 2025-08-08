@@ -10,6 +10,7 @@
           "ErrorEquals": [
             "States.ALL"
           ],
+          "ResultPath": "$.error",
           "Next": "FailureLambda"
         }
       ],
@@ -18,6 +19,7 @@
     "FailureLambda": {
       "Type": "Task",
       "Resource": "${FailureLambdaArn}",
+      "InputPath": "$",
       "End": true
     }
   }

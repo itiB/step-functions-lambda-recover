@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+
+# Lambda zip
+lambda/*.zip
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+crash.log
+
+# VSCode
+.vscode/
+
+# Mac
+.DS_Store

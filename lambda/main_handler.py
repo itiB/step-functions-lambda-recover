@@ -18,8 +18,8 @@ def lambda_handler(event, context):
         except Exception:
             item_id = 'unknown'
 
-        # 7割で成功、3割で失敗
-        if random.random() < 0.7:
+        # 5割で成功、5割で失敗
+        if random.random() < 0.5:
             table = dynamodb.Table(TABLE_NAME)
             table.put_item(
                 Item={
