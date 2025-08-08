@@ -5,6 +5,14 @@
     "MainLambda": {
       "Type": "Task",
       "Resource": "${MainLambdaArn}",
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "States.ALL"
+          ],
+          "MaxAttempts": 1
+        }
+      ],
       "Catch": [
         {
           "ErrorEquals": [
