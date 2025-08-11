@@ -58,6 +58,13 @@ resource "aws_iam_role_policy" "lambda_policy" {
           "sqs:GetQueueAttributes"
         ]
         Resource = aws_sqs_queue.stepfunc_sample.arn
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "states:StartExecution"
+        ]
+        Resource = "*"
       }
     ]
   })

@@ -8,14 +8,12 @@ dynamodb = boto3.resource('dynamodb')
 TABLE_NAME = os.environ.get('DYNAMODB_TABLE', 'StepFuncSampleTable')
 
 def lambda_handler(event, context):
-    # SQSイベントはRecords配列で渡される
-    records = event.get('Records', [])
-    for record in records:
-        body = record.get('body', '{}')
+    # EventBridge Pipe経由の場合、eventは配列で渡る
+    for body in event:
         try:
-            body_json = json.loads(body)
-            item_id = body_json.get('id', 'unknown')
-        except Exception:
+            inner_json = json.loads(body['body'])
+            item_id = inner_json.get('id', 'unknown')
+        except Exception as e:
             item_id = 'unknown'
 
         # 5割で成功、5割で失敗

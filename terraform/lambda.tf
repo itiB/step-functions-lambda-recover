@@ -25,10 +25,3 @@ resource "aws_lambda_function" "failure_handler" {
     }
   }
 }
-
-resource "aws_lambda_event_source_mapping" "main_handler_sqs" {
-  event_source_arn = aws_sqs_queue.stepfunc_sample.arn
-  function_name    = aws_lambda_function.main_handler.arn
-  enabled          = true
-  batch_size       = 1
-}

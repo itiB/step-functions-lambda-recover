@@ -5,20 +5,12 @@
     "MainLambda": {
       "Type": "Task",
       "Resource": "${MainLambdaArn}",
-      "Retry": [
-        {
-          "ErrorEquals": [
-            "States.ALL"
-          ],
-          "MaxAttempts": 1
-        }
-      ],
       "Catch": [
         {
           "ErrorEquals": [
-            "States.ALL"
+            "Exception"
           ],
-          "ResultPath": "$.error",
+          "ResultPath": null,
           "Next": "FailureLambda"
         }
       ],
@@ -27,7 +19,6 @@
     "FailureLambda": {
       "Type": "Task",
       "Resource": "${FailureLambdaArn}",
-      "InputPath": "$",
       "End": true
     }
   }
